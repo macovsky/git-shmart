@@ -133,7 +133,7 @@ it_rebases_diverged_branches() {
   assertTrue 'reports need for rebase' \
     '[[ $A =~ "Both local and remote branches have moved on." ]]'
   assertTrue 'reports rebase' \
-    '[[ $A =~ "Executing: git rebase -p origin/master" ]]'
+    '[[ $A =~ "Executing: git rebase --rebase-merges origin/master" ]]'
   assertTrue 'reports successful rebase' \
     '[[ $A =~ "Successfully rebased and updated refs/heads/master." ]]'
   assertEquals "local changes remote changes first" "$(git log --pretty=format:%s | xargs)"
@@ -148,7 +148,7 @@ it_does_not_stash_before_rebase_with_diverged_branches_and_untracked_files() {
   A=$(shmart_pull)
 
   assertTrue 'reports rebase' \
-    "[[ \"$A\" =~ \"Executing: git rebase -p origin/master\" ]]"
+    "[[ \"$A\" =~ \"Executing: git rebase --rebase-merges origin/master\" ]]"
   assertTrue 'reports successful rebase' \
     "[[ \"$A\" =~ \"Successfully rebased and updated refs/heads/master.\" ]]"
   assertEquals "?? foo" "$(git status --short)"
@@ -173,7 +173,7 @@ it_stashes_rebases_and_pops_with_local_uncommited_changes_and_diverged_branches(
   assertTrue 'reports stash' \
     '[[ $A =~ "Executing: git stash" ]]'
   assertTrue 'reports rebase' \
-    '[[ $A =~ "Executing: git rebase -p origin/master" ]]'
+    '[[ $A =~ "Executing: git rebase --rebase-merges origin/master" ]]'
   assertTrue 'reports successful rebase' \
     '[[ $A =~ "Successfully rebased and updated refs/heads/master." ]]'
   assertEquals "$EXPECTED" "$(git status --short)"
