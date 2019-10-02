@@ -9,7 +9,7 @@ tracking_remote() {
 }
 
 tracking_branch() {
-  git config branch."$(local_branch)".merge | cut -d / -f 3
+  git config branch."$(local_branch)".merge | cut -d / -f 3-
 }
 
 merge_base() {
