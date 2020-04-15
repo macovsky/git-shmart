@@ -1,7 +1,7 @@
 #!/bin/bash
 
 local_branch() {
-  git name-rev --name-only HEAD
+  git rev-parse --abbrev-ref HEAD
 }
 
 tracking_remote() {
